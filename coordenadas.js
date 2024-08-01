@@ -6,17 +6,21 @@ function convertirPolaresARectangulares() {
         document.getElementById('resultadoPolares').innerText = 'Por favor, ingrese valores válidos.';
         return;
     }
+    [xx,yy] =convertir2PolaresARectangulares(r, theta)
 
-    // Convertir θ de grados a radianes
+ 
+    document.getElementById('resultadoPolares').innerText = `Coordenadas Rectangulares: X = ${xx.toFixed(2)}, Y = ${yy.toFixed(2)}`;
+}
+function convertir2PolaresARectangulares(r,theta){
     const thetaRad = theta * (Math.PI / 180);
     
     // Convertir coordenadas polares a rectangulares
     const x = r * Math.cos(thetaRad);
     const y = r * Math.sin(thetaRad);
+    return[x,r];
 
-    document.getElementById('resultadoPolares').innerText = `Coordenadas Rectangulares: X = ${x.toFixed(2)}, Y = ${y.toFixed(2)}`;
+
 }
-
 function convertirRectangularesAPolares() {
     const x = parseFloat(document.getElementById('x').value);
     const y = parseFloat(document.getElementById('y').value);
