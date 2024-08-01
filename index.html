@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conversión de Coordenadas</title>
+</head>
+<body>
+    <h1>Conversión de Coordenadas</h1>
+    <div>
+        <h2>Convertir Coordenadas Polares a Rectangulares</h2>
+        <label for="r">Radio (r): </label>
+        <input type="number" id="r" step="any">
+        <br>
+        <label for="theta">Ángulo (θ) en grados: </label>
+        <input type="number" id="theta" step="any">
+        <br>
+        <button onclick="convertirPolaresARectangulares()">Convertir a Rectangulares</button>
+        <p id="resultadoPolares"></p>
+    </div>
+
+    <div>
+        <h2>Convertir Coordenadas Rectangulares a Polares</h2>
+        <label for="x">X: </label>
+        <input type="number" id="x" step="any">
+        <br>
+        <label for="y">Y: </label>
+        <input type="number" id="y" step="any">
+        <br>
+        <button onclick="convertirRectangularesAPolares()">Convertir a Polares</button>
+        <p id="resultadoRectangulares"></p>
+    </div>
+
+    <script>function convertirPolaresARectangulares() {
+        const r = parseFloat(document.getElementById('r').value);
+        const theta = parseFloat(document.getElementById('theta').value);
+
+        if (isNaN(r) || isNaN(theta)) {
+            document.getElementById('resultadoPolares').innerText = 'Por favor, ingrese valores válidos.';
+            return;
+        }
+
+        // Convertir θ de grados a radianes
+        const thetaRad = theta * (Math.PI / 180);
+        
+        // Convertir coordenadas polares a rectangulares
+        const x = r * Math.cos(thetaRad);
+        const y = r * Math.sin(thetaRad);
+
+        document.getElementById('resultadoPolares').innerText = `Coordenadas Rectangulares: X = ${x.toFixed(2)}, Y = ${y.toFixed(2)}`;
+    }
+
+    function convertirRectangularesAPolares() {
+        const x = parseFloat(document.getElementById('x').value);
+        const y = parseFloat(document.getElementById('y').value);
+
+        if (isNaN(x) || isNaN(y)) {
+            document.getElementById('resultadoRectangulares').innerText = 'Por favor, ingrese valores válidos.';
+            return;
+        }
+
+        // Convertir coordenadas rectangulares a polares
+        const r = Math.sqrt(x * x + y * y);
+        const thetaRad = Math.atan2(y, x);
+        const theta = thetaRad * (180 / Math.PI); // Convertir θ de radianes a grados
+
+        document.getElementById('resultadoRectangulares').innerText = `Coordenadas Polares: Radio (r) = ${r.toFixed(2)}, Ángulo (θ) = ${theta.toFixed(2)} grados`;
+    }
+        
+    </script>
+</body>
+</html>
